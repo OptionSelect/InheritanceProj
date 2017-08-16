@@ -6,7 +6,7 @@ namespace InheritanceProj
         public string Recipient { get; set; }
         public string SmsProvider { get; set; }
 
-        public TextNotification(string subject, string body, string recipient, string smsprovider): base(subject, body)
+        public TextNotification(string subject, string body, string recipient, string smsprovider) : base(subject, body)
         {
             Subject = subject;
             Body = body;
@@ -16,7 +16,14 @@ namespace InheritanceProj
 
         public override void Transport()
         {
-            Console.WriteLine($"{Subject}'s message - {Body} - is going to {Recipient} whose service is proivded by {SmsProvider}.");
+            try
+            {
+                Console.WriteLine($"{Subject}'s message - {Body} - is going to {Recipient} whose service is proivded by {SmsProvider}.");
+            }
+            catch(NoTransportException)
+            {
+                throw;
+            }
         }
     }
 }
